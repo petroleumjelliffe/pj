@@ -8,18 +8,29 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet var button:UIButton?
     @IBOutlet var timer:UITextField?
+    @IBOutlet var laps:UITableView?
     
     var startTime = NSTimeInterval()
     
     var timer2 = NSTimer()
     
+    var state:Int = 0
+    
+    var accumulatedTime = NSTimeInterval()
+    
+    var lapTimes = [String]()
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        
+        self.laps?.dataSource = self
+        self.laps?.delegate = self
     }
 
     override func didReceiveMemoryWarning() {
@@ -27,9 +38,26 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+       // var cell:UITableViewCell = self.laps?.dequeueReusableCellWithIdentifier("cell")! as UITableViewCell
+        
+        var cell:UITableViewCell = UITableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: "cell")
+
+            cell.textLabel?.text = self.lapTimes[indexPath.row]
+        
+        return cell
+    }
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return lapTimes.count
+        
+    }
+    
     func updateTime() {
+        
         var currentTime = NSDate.timeIntervalSinceReferenceDate()
-        var elapsedTime:NSTimeInterval = currentTime - startTime
+        var elapsedTime:NSTimeInterval = currentTime - startTime + accumulatedTime
+        
         
         let minutes = UInt8(elapsedTime/60.0)
         
@@ -57,11 +85,46 @@ class ViewController: UIViewController {
     
     @IBAction func startTimer(sender:AnyObject) {  //start button
         
-        if !timer2.valid {
-            let aSelector:Selector = "updateTime"
-            timer2 = NSTimer.scheduledTimerWithTimeInterval(0.01, target: self, selector: aSelector, userInfo: nil, repeats: true)
-            startTime = NSDate.timeIntervalSinceReferenceDate()
+        if (self.state == 0) {
+            if !timer2.valid {
+                let aSelector:Selector = "updateTime"
+                timer2 = NSTimer.scheduledTimerWithTimeInterval(0.01, target: self, selector: aSelector, userInfo: nil, repeats: true)
+                startTime = NSDate.timeIntervalSinceReferenceDate()
+            }
+        } else {
+            
+            
+            timer2.invalidate()
+            
+            
         }
+        
+        
+        self.state = (++self.state) % 2
+        
+        
+        
+    }
+    @IBAction func lapTimer(sender:AnyObject) {  //start button
+        
+        
+        lapTimes.append(timer!.text)
+        
+        laps?.reloadData()
+        
+        
+        timer2.invalidate()
+
+  
+            if !timer2.valid {
+                let aSelector:Selector = "updateTime"
+                timer2 = NSTimer.scheduledTimerWithTimeInterval(0.01, target: self, selector: aSelector, userInfo: nil, repeats: true)
+                startTime = NSDate.timeIntervalSinceReferenceDate()
+            }
+
+        
+        
+
         
         
         
@@ -70,9 +133,10 @@ class ViewController: UIViewController {
         
         
         timer2.invalidate()
-        timer?.text="00:00:00"
+        //timer?.text="00:00:00"
         
     }
+    
     
     
 
