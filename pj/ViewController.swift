@@ -39,13 +39,15 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-       // var cell:UITableViewCell = self.laps?.dequeueReusableCellWithIdentifier("cell")! as UITableViewCell
+        var cell:UITableViewCell? = self.laps?.dequeueReusableCellWithIdentifier("CELL") as? UITableViewCell
         
-        var cell:UITableViewCell = UITableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: "cell")
-
-            cell.textLabel?.text = self.lapTimes[indexPath.row]
+        if cell == nil {
+            cell = UITableViewCell(style: UITableViewCellStyle.Value1, reuseIdentifier: "CELL")
+        }
         
-        return cell
+        cell?.textLabel?.text  = self.lapTimes[indexPath.row]
+        
+        return cell!
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
