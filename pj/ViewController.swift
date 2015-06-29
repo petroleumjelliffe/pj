@@ -66,6 +66,13 @@ class ViewController: UIViewController {
         
         
     }
+    @IBAction func stopTimer(sender:AnyObject) {  //stop  button
+        
+        
+        timer2.invalidate()
+        timer?.text="00:00:00"
+        
+    }
     
     
 
