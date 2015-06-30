@@ -57,7 +57,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     func updateTime() {
         
-        var currentTime = NSDate.timeIntervalSinceReferenceDate()
+        let currentTime = NSDate.timeIntervalSinceReferenceDate()
         var elapsedTime:NSTimeInterval = currentTime - startTime + accumulatedTime
         
         
@@ -110,7 +110,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     @IBAction func lapTimer(sender:AnyObject) {  //start button
         
         
-        lapTimes.append(timer!.text)
+        lapTimes.append(timer!.text!)
         
         laps?.reloadData()
         

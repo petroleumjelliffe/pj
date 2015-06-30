@@ -13,6 +13,10 @@
 		C35C57B31B41C8C1003AA45B /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C35C57B21B41C8C1003AA45B /* Images.xcassets */; };
 		C35C57B61B41C8C1003AA45B /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = C35C57B41B41C8C1003AA45B /* LaunchScreen.xib */; };
 		C35C57C21B41C8C1003AA45B /* pjTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C35C57C11B41C8C1003AA45B /* pjTests.swift */; };
+		C35C57D21B41E736003AA45B /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C35C57D11B41E736003AA45B /* NotificationCenter.framework */; };
+		C35C57D71B41E736003AA45B /* TodayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C35C57D61B41E736003AA45B /* TodayViewController.swift */; };
+		C35C57D91B41E736003AA45B /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C35C57D81B41E736003AA45B /* MainInterface.storyboard */; };
+		C35C57DC1B41E736003AA45B /* lap widget.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = C35C57CF1B41E736003AA45B /* lap widget.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -23,7 +27,28 @@
 			remoteGlobalIDString = C35C57A51B41C8C1003AA45B;
 			remoteInfo = pj;
 		};
+		C35C57DA1B41E736003AA45B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C35C579E1B41C8C1003AA45B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = C35C57CE1B41E736003AA45B;
+			remoteInfo = "lap widget";
+		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		C35C57E01B41E736003AA45B /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				C35C57DC1B41E736003AA45B /* lap widget.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		C35C57A61B41C8C1003AA45B /* pj.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = pj.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -36,6 +61,11 @@
 		C35C57BB1B41C8C1003AA45B /* pjTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = pjTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C35C57C01B41C8C1003AA45B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C35C57C11B41C8C1003AA45B /* pjTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = pjTests.swift; sourceTree = "<group>"; };
+		C35C57CF1B41E736003AA45B /* lap widget.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "lap widget.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		C35C57D11B41E736003AA45B /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
+		C35C57D51B41E736003AA45B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C35C57D61B41E736003AA45B /* TodayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayViewController.swift; sourceTree = "<group>"; };
+		C35C57D81B41E736003AA45B /* MainInterface.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MainInterface.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,6 +83,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		C35C57CC1B41E736003AA45B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C35C57D21B41E736003AA45B /* NotificationCenter.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -61,6 +99,8 @@
 			children = (
 				C35C57A81B41C8C1003AA45B /* pj */,
 				C35C57BE1B41C8C1003AA45B /* pjTests */,
+				C35C57D31B41E736003AA45B /* lap widget */,
+				C35C57D01B41E736003AA45B /* Frameworks */,
 				C35C57A71B41C8C1003AA45B /* Products */,
 			);
 			sourceTree = "<group>";
@@ -70,6 +110,7 @@
 			children = (
 				C35C57A61B41C8C1003AA45B /* pj.app */,
 				C35C57BB1B41C8C1003AA45B /* pjTests.xctest */,
+				C35C57CF1B41E736003AA45B /* lap widget.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -112,6 +153,32 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		C35C57D01B41E736003AA45B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				C35C57D11B41E736003AA45B /* NotificationCenter.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		C35C57D31B41E736003AA45B /* lap widget */ = {
+			isa = PBXGroup;
+			children = (
+				C35C57D61B41E736003AA45B /* TodayViewController.swift */,
+				C35C57D81B41E736003AA45B /* MainInterface.storyboard */,
+				C35C57D41B41E736003AA45B /* Supporting Files */,
+			);
+			path = "lap widget";
+			sourceTree = "<group>";
+		};
+		C35C57D41B41E736003AA45B /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				C35C57D51B41E736003AA45B /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -122,10 +189,12 @@
 				C35C57A21B41C8C1003AA45B /* Sources */,
 				C35C57A31B41C8C1003AA45B /* Frameworks */,
 				C35C57A41B41C8C1003AA45B /* Resources */,
+				C35C57E01B41E736003AA45B /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				C35C57DB1B41E736003AA45B /* PBXTargetDependency */,
 			);
 			name = pj;
 			productName = pj;
@@ -150,12 +219,30 @@
 			productReference = C35C57BB1B41C8C1003AA45B /* pjTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		C35C57CE1B41E736003AA45B /* lap widget */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C35C57DD1B41E736003AA45B /* Build configuration list for PBXNativeTarget "lap widget" */;
+			buildPhases = (
+				C35C57CB1B41E736003AA45B /* Sources */,
+				C35C57CC1B41E736003AA45B /* Frameworks */,
+				C35C57CD1B41E736003AA45B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "lap widget";
+			productName = "lap widget";
+			productReference = C35C57CF1B41E736003AA45B /* lap widget.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		C35C579E1B41C8C1003AA45B /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 0700;
 				LastUpgradeCheck = 0620;
 				ORGANIZATIONNAME = "Peter Jelliffe";
 				TargetAttributes = {
@@ -165,6 +252,9 @@
 					C35C57BA1B41C8C1003AA45B = {
 						CreatedOnToolsVersion = 6.2;
 						TestTargetID = C35C57A51B41C8C1003AA45B;
+					};
+					C35C57CE1B41E736003AA45B = {
+						CreatedOnToolsVersion = 6.2;
 					};
 				};
 			};
@@ -183,6 +273,7 @@
 			targets = (
 				C35C57A51B41C8C1003AA45B /* pj */,
 				C35C57BA1B41C8C1003AA45B /* pjTests */,
+				C35C57CE1B41E736003AA45B /* lap widget */,
 			);
 		};
 /* End PBXProject section */
@@ -202,6 +293,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C35C57CD1B41E736003AA45B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C35C57D91B41E736003AA45B /* MainInterface.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -225,6 +324,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		C35C57CB1B41E736003AA45B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C35C57D71B41E736003AA45B /* TodayViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -232,6 +339,11 @@
 			isa = PBXTargetDependency;
 			target = C35C57A51B41C8C1003AA45B /* pj */;
 			targetProxy = C35C57BC1B41C8C1003AA45B /* PBXContainerItemProxy */;
+		};
+		C35C57DB1B41E736003AA45B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = C35C57CE1B41E736003AA45B /* lap widget */;
+			targetProxy = C35C57DA1B41E736003AA45B /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -338,6 +450,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = pj/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -348,6 +461,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = pj/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -388,6 +502,30 @@
 			};
 			name = Release;
 		};
+		C35C57DE1B41E736003AA45B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "lap widget/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		C35C57DF1B41E736003AA45B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = "lap widget/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -407,6 +545,7 @@
 				C35C57C71B41C8C1003AA45B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		C35C57C81B41C8C1003AA45B /* Build configuration list for PBXNativeTarget "pjTests" */ = {
 			isa = XCConfigurationList;
@@ -415,6 +554,16 @@
 				C35C57CA1B41C8C1003AA45B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C35C57DD1B41E736003AA45B /* Build configuration list for PBXNativeTarget "lap widget" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C35C57DE1B41E736003AA45B /* Debug */,
+				C35C57DF1B41E736003AA45B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
