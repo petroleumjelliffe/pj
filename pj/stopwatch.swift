@@ -32,9 +32,9 @@ class Stopwatch:NSObject {
         var currentTime = NSDate.timeIntervalSinceReferenceDate()
         var elapsedTime:NSTimeInterval = currentTime - startTime + accumulatedTime
         
-        println("current time: \(currentTime)")
-        println("start time: \(self.startTime)")
-        println("elapsed time: \(elapsedTime)")
+        print("current time: \(currentTime)")
+        print("start time: \(self.startTime)")
+        print("elapsed time: \(elapsedTime)")
         
         
         return formatTimes(elapsedTime)
@@ -92,11 +92,11 @@ class Stopwatch:NSObject {
         
         //then save the differencefrom the previous lap, if any
         let x = lapInterval - recordedLaps.last!
-        println("x = \(x)")
+        print("x = \(x)")
         lapTimes.append(formatTimes(x) as String)
 
         //add the current time as a lap timestamp
-        println(lapInterval)
+        print(lapInterval)
         recordedLaps.append(lapInterval)
         
 
