@@ -17,6 +17,7 @@
 		C35C57D71B41E736003AA45B /* TodayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C35C57D61B41E736003AA45B /* TodayViewController.swift */; };
 		C35C57D91B41E736003AA45B /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C35C57D81B41E736003AA45B /* MainInterface.storyboard */; };
 		C35C57DC1B41E736003AA45B /* lap widget.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = C35C57CF1B41E736003AA45B /* lap widget.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		C3735E7F1B447C7800A47F2A /* stopwatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3735E7E1B447C7800A47F2A /* stopwatch.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -66,6 +67,7 @@
 		C35C57D51B41E736003AA45B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C35C57D61B41E736003AA45B /* TodayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayViewController.swift; sourceTree = "<group>"; };
 		C35C57D81B41E736003AA45B /* MainInterface.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MainInterface.storyboard; sourceTree = "<group>"; };
+		C3735E7E1B447C7800A47F2A /* stopwatch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = stopwatch.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,6 +120,7 @@
 		C35C57A81B41C8C1003AA45B /* pj */ = {
 			isa = PBXGroup;
 			children = (
+				C3735E7E1B447C7800A47F2A /* stopwatch.swift */,
 				C35C57AB1B41C8C1003AA45B /* AppDelegate.swift */,
 				C35C57AD1B41C8C1003AA45B /* ViewController.swift */,
 				C35C57AF1B41C8C1003AA45B /* Main.storyboard */,
@@ -313,6 +316,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C35C57AE1B41C8C1003AA45B /* ViewController.swift in Sources */,
+				C3735E7F1B447C7800A47F2A /* stopwatch.swift in Sources */,
 				C35C57AC1B41C8C1003AA45B /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
