@@ -15,7 +15,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     @IBOutlet var timer:UITextField?
     @IBOutlet var laps:UITableView?
     
-    var stopwatch = Stopwatch()
+    var stopwatch = Stopwatch()  //stopwatch object
     
 
     
