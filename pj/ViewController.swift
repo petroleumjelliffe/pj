@@ -12,12 +12,14 @@ import UIKit
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet var button:UIButton?
-    @IBOutlet var timer:UITextField?
+    @IBOutlet var stop:UIButton?
+    @IBOutlet var start:UIButton?
+    @IBOutlet var readout:UITextField?
     @IBOutlet var laps:UITableView?
     
     var stopwatch = Stopwatch()  //stopwatch object
     
-
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,7 +28,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         self.laps?.dataSource = self
         self.laps?.delegate = self
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -39,7 +41,12 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             cell = UITableViewCell(style: UITableViewCellStyle.Value1, reuseIdentifier: "CELL")
         }
         
-        cell?.textLabel?.text  = stopwatch.lapTimes[indexPath.row]
+        var x = stopwatch.lapTimes[indexPath.row]
+        
+        cell?.textLabel?.text = x
+        cell?.textLabel?.font = UIFont.systemFontOfSize(11.0)
+
+
         
         return cell!
     }
@@ -52,58 +59,82 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     @IBAction func startTimer(sender:AnyObject) {  //start button
         
+        if !stopwatch.isCounting {
+            //start the timer
+            let aSelector:Selector = "updateTimer"
+            stopwatch.timer = NSTimer.scheduledTimerWithTimeInterval(0.01, target: self, selector: aSelector, userInfo: nil, repeats: true)
+        
+            stopwatch.startTimer()
+            
+            //change start time label
+            start?.setTitle("Lap", forState: UIControlState.Normal)
+            stop?.setTitle("Stop", forState: UIControlState.Normal)
+            
+        } else {//it's already running, save a lap
+            //lap the timer
+            stopwatch.lap()
+            laps?.reloadData()
+
+        }
+        
+        //toggle the function of the button
         
         //
-        
-        stopwatch.toggleTimer()
-  
-        
-        
-        stopwatch.toggleState()
-        
-        
         
     }
     
     func updateTimer() {
-        timer!.text = stopwatch.updateTime() as String
+        println(stopwatch.getTotalElapsedTime())
+        readout!.text = stopwatch.getTotalElapsedTime() as String
         
     }
     
     @IBAction func lapTimer(sender:AnyObject) {  //lap button
         
         
-        stopwatch.addTime( timer!.text)
-
+        stopwatch.lap()
+        
         laps?.reloadData()
         
         
-        stopwatch.timer2.invalidate()
-
-  
-            if !stopwatch.timer2.valid {
-                let aSelector:Selector = "updateTimer"
-                stopwatch.timer2 = NSTimer.scheduledTimerWithTimeInterval(0.01, target: self, selector: aSelector, userInfo: nil, repeats: true)
-                stopwatch.startTime = NSDate.timeIntervalSinceReferenceDate()
-            }
 
         
         
-
+        
+        
         
         
         
     }
     @IBAction func stopTimer(sender:AnyObject) {  //stop  button
         
-        
-        stopwatch.timer2.invalidate()
+        if stopwatch.timer.valid {
+            //stop if timer is running
+            stopwatch.stopTimer()
+            
+            //update button's label to "reset"
+            stop?.setTitle("Reset", forState: UIControlState.Normal)
+            start?.setTitle("Start", forState: UIControlState.Normal)
+
+
+        } else {
+            //reset timer if it's already stopped
+            stopwatch.resetTimer()
+            
+            //zero out the readout
+            readout!.text = "00:00.00"
+            
+            laps?.reloadData()
+
+            stop?.setTitle("Stop", forState: UIControlState.Normal)
+
+            
+        }
         //timer?.text="00:00:00"
         
     }
     
     
     
-
+    
 }
-
