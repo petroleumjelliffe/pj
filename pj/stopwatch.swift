@@ -39,27 +39,6 @@ class Stopwatch:NSObject {
         
         return formatTimes(elapsedTime)
         
-//        let minutes = UInt8(elapsedTime/60.0)
-//        
-//        elapsedTime -= (NSTimeInterval(minutes)*60)
-//        
-//        let seconds = UInt8(elapsedTime)
-//        
-//        elapsedTime -= NSTimeInterval(seconds)
-//        
-//        //find out the fraction of milliseconds to be displayed.
-//        
-//        let fraction = UInt8(elapsedTime * 100)
-//        
-//        //add the leading zero for minutes, seconds and millseconds and store them as string constants
-//        
-//        let strMinutes = String(format: "%02d", minutes)
-//        let strSeconds = String(format: "%02d", seconds)
-//        let strFraction = String(format: "%02d", fraction)
-//        
-//        //concatenate minuets, seconds and milliseconds as assign it to the UILabel
-//        
-//        return  "\(strMinutes):\(strSeconds).\(strFraction)"
         
     }
     
@@ -108,27 +87,30 @@ class Stopwatch:NSObject {
     }
     
     func lap() {
-        //get the time Lap was pressed
+        //get the timestamp when Lap was pressed
         let lapInterval = NSDate.timeIntervalSinceReferenceDate()
         
+        //then save the differencefrom the previous lap, if any
+        let x = lapInterval - recordedLaps.last!
+        println("x = \(x)")
+        lapTimes.append(formatTimes(x) as String)
+
+        //add the current time as a lap timestamp
         println(lapInterval)
         recordedLaps.append(lapInterval)
         
-        let date = NSDate()
-        let formatter = NSDateFormatter()
-        formatter.timeStyle = .ShortStyle
-        formatter.dateStyle = .ShortStyle
-        let now = formatter.stringFromDate(date)
-        
-        lapTimes.append(now)
 
     }
     
     func startTimer() {
         //get the time stoppwatch was started
-        self.startTime = NSDate.timeIntervalSinceReferenceDate()
+        let x = NSDate.timeIntervalSinceReferenceDate()
+        self.startTime = x
         
         self.isCounting = true
+        
+        //set as first lap timestamp
+        recordedLaps.append(x)
     }
     
     func stopTimer() {

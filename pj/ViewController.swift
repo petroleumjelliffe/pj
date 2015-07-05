@@ -12,6 +12,8 @@ import UIKit
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet var button:UIButton?
+    @IBOutlet var stop:UIButton?
+    @IBOutlet var start:UIButton?
     @IBOutlet var readout:UITextField?
     @IBOutlet var laps:UITableView?
     
@@ -39,9 +41,11 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             cell = UITableViewCell(style: UITableViewCellStyle.Value1, reuseIdentifier: "CELL")
         }
         
-        var x = stopwatch.recordedLaps[indexPath.row]
+        var x = stopwatch.lapTimes[indexPath.row]
         
-        cell?.textLabel?.text = stopwatch.formatTimes(x) as String
+        cell?.textLabel?.text = x
+        cell?.textLabel?.font = UIFont.systemFontOfSize(11.0)
+
 
         
         return cell!
@@ -61,9 +65,16 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             stopwatch.timer = NSTimer.scheduledTimerWithTimeInterval(0.01, target: self, selector: aSelector, userInfo: nil, repeats: true)
         
             stopwatch.startTimer()
-        } else {
-            //stop the timer
-            stopwatch.stopTimer()
+            
+            //change start time label
+            start?.setTitle("Lap", forState: UIControlState.Normal)
+            stop?.setTitle("Stop", forState: UIControlState.Normal)
+            
+        } else {//it's already running, save a lap
+            //lap the timer
+            stopwatch.lap()
+            laps?.reloadData()
+
         }
         
         //toggle the function of the button
@@ -102,12 +113,21 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             stopwatch.stopTimer()
             
             //update button's label to "reset"
+            stop?.setTitle("Reset", forState: UIControlState.Normal)
+            start?.setTitle("Start", forState: UIControlState.Normal)
+
+
         } else {
             //reset timer if it's already stopped
             stopwatch.resetTimer()
             
             //zero out the readout
             readout!.text = "00:00.00"
+            
+            laps?.reloadData()
+
+            stop?.setTitle("Stop", forState: UIControlState.Normal)
+
             
         }
         //timer?.text="00:00:00"
