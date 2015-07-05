@@ -8,36 +8,74 @@
 
 import Foundation
 
+
 class Stopwatch:NSObject {
     var startTime = NSTimeInterval()
     
-    var timer2 = NSTimer()
     
-    var state:Int = 0
+    var timer = NSTimer()  //external objects call setintervalwith
     
-    var accumulatedTime = NSTimeInterval()
+    var isCounting:Bool = false
+    
+    var accumulatedTime: NSTimeInterval = 0
     
     var lapTimes = [String]()
     
+    var recordedLaps = [NSTimeInterval]()
+    
+
 
     
-    func updateTime() -> NSString {
+    func getTotalElapsedTime() -> NSString {
         
+        //calculate elapsed time
         var currentTime = NSDate.timeIntervalSinceReferenceDate()
-        var elapsedTime:NSTimeInterval = currentTime - startTime
+        var elapsedTime:NSTimeInterval = currentTime - startTime + accumulatedTime
+        
+        println("current time: \(currentTime)")
+        println("start time: \(self.startTime)")
+        println("elapsed time: \(elapsedTime)")
         
         
-        let minutes = UInt8(elapsedTime/60.0)
+        return formatTimes(elapsedTime)
         
-        elapsedTime -= (NSTimeInterval(minutes)*60)
+//        let minutes = UInt8(elapsedTime/60.0)
+//        
+//        elapsedTime -= (NSTimeInterval(minutes)*60)
+//        
+//        let seconds = UInt8(elapsedTime)
+//        
+//        elapsedTime -= NSTimeInterval(seconds)
+//        
+//        //find out the fraction of milliseconds to be displayed.
+//        
+//        let fraction = UInt8(elapsedTime * 100)
+//        
+//        //add the leading zero for minutes, seconds and millseconds and store them as string constants
+//        
+//        let strMinutes = String(format: "%02d", minutes)
+//        let strSeconds = String(format: "%02d", seconds)
+//        let strFraction = String(format: "%02d", fraction)
+//        
+//        //concatenate minuets, seconds and milliseconds as assign it to the UILabel
+//        
+//        return  "\(strMinutes):\(strSeconds).\(strFraction)"
         
-        let seconds = UInt8(elapsedTime)
+    }
+    
+    func formatTimes (timeToFormat:NSTimeInterval) -> NSString {
+        var x = timeToFormat
+        var minutes = UInt(x/60.0)
         
-        elapsedTime -= NSTimeInterval(seconds)
+        x -= (NSTimeInterval(minutes)*60)
+        
+        let seconds = UInt(x)
+        
+        x -= NSTimeInterval(seconds)
         
         //find out the fraction of milliseconds to be displayed.
         
-        let fraction = UInt8(elapsedTime * 100)
+        let fraction = UInt(x * 100)
         
         //add the leading zero for minutes, seconds and millseconds and store them as string constants
         
@@ -48,46 +86,68 @@ class Stopwatch:NSObject {
         //concatenate minuets, seconds and milliseconds as assign it to the UILabel
         
         return  "\(strMinutes):\(strSeconds).\(strFraction)"
+    }
+    
+    func getLapTimes() {
+        
+        
         
     }
     
-    func toggleTimer() {
-    
-        if (self.state == 0) {
-        if self.timer2.valid {
-            let aSelector:Selector = "updateTime"
-            self.timer2 = NSTimer.scheduledTimerWithTimeInterval(0.01, target: self, selector: aSelector, userInfo: nil, repeats: true)
-            self.startTime = NSDate.timeIntervalSinceReferenceDate()
-            }
-        } else {
-        
-        
-        timer2.invalidate()
-        
-        
-        }
-    }
+
     
     func toggleState() {
-        self.state = (++self.state) % 2
+        self.isCounting = !self.isCounting
 
     }
     
-    func addTime(time:NSString) {
+    func saveLapTime(time:NSString) {
         self.lapTimes.append(time as String)
         
         
     }
     
     func lap() {
+        //get the time Lap was pressed
+        let lapInterval = NSDate.timeIntervalSinceReferenceDate()
         
-        if !timer2.valid {
-            let aSelector:Selector = "updateTime"
-            timer2 = NSTimer.scheduledTimerWithTimeInterval(0.01, target: self, selector: aSelector, userInfo: nil, repeats: true)
-            startTime = NSDate.timeIntervalSinceReferenceDate()
-        }
+        println(lapInterval)
+        recordedLaps.append(lapInterval)
         
+        let date = NSDate()
+        let formatter = NSDateFormatter()
+        formatter.timeStyle = .ShortStyle
+        formatter.dateStyle = .ShortStyle
+        let now = formatter.stringFromDate(date)
+        
+        lapTimes.append(now)
 
+    }
+    
+    func startTimer() {
+        //get the time stoppwatch was started
+        self.startTime = NSDate.timeIntervalSinceReferenceDate()
+        
+        self.isCounting = true
+    }
+    
+    func stopTimer() {
+        //stop the timer
+        self.timer.invalidate()
+        
+        //save the accumulated time
+        self.accumulatedTime += (NSDate.timeIntervalSinceReferenceDate()-self.startTime)
+        
+        self.isCounting = false
+    }
+    
+    func resetTimer() {
+        //reset the accummulated time
+        self.accumulatedTime = 0;
+        
+        //delete all saved laps
+        self.lapTimes.removeAll(keepCapacity: false)
+        self.recordedLaps.removeAll(keepCapacity: false)
     }
 
     

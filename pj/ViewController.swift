@@ -12,12 +12,12 @@ import UIKit
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet var button:UIButton?
-    @IBOutlet var timer:UITextField?
+    @IBOutlet var readout:UITextField?
     @IBOutlet var laps:UITableView?
     
     var stopwatch = Stopwatch()  //stopwatch object
     
-
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,7 +26,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         self.laps?.dataSource = self
         self.laps?.delegate = self
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -39,7 +39,10 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             cell = UITableViewCell(style: UITableViewCellStyle.Value1, reuseIdentifier: "CELL")
         }
         
-        cell?.textLabel?.text  = stopwatch.lapTimes[indexPath.row]
+        var x = stopwatch.recordedLaps[indexPath.row]
+        
+        cell?.textLabel?.text = stopwatch.formatTimes(x) as String
+
         
         return cell!
     }
@@ -52,58 +55,66 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     @IBAction func startTimer(sender:AnyObject) {  //start button
         
+        if !stopwatch.isCounting {
+            //start the timer
+            let aSelector:Selector = "updateTimer"
+            stopwatch.timer = NSTimer.scheduledTimerWithTimeInterval(0.01, target: self, selector: aSelector, userInfo: nil, repeats: true)
+        
+            stopwatch.startTimer()
+        } else {
+            //stop the timer
+            stopwatch.stopTimer()
+        }
+        
+        //toggle the function of the button
         
         //
-        
-        stopwatch.toggleTimer()
-  
-        
-        
-        stopwatch.toggleState()
-        
-        
         
     }
     
     func updateTimer() {
-        timer!.text = stopwatch.updateTime() as String
+        println(stopwatch.getTotalElapsedTime())
+        readout!.text = stopwatch.getTotalElapsedTime() as String
         
     }
     
     @IBAction func lapTimer(sender:AnyObject) {  //lap button
         
         
-        stopwatch.addTime( timer!.text)
-
+        stopwatch.lap()
+        
         laps?.reloadData()
         
         
-        stopwatch.timer2.invalidate()
-
-  
-            if !stopwatch.timer2.valid {
-                let aSelector:Selector = "updateTimer"
-                stopwatch.timer2 = NSTimer.scheduledTimerWithTimeInterval(0.01, target: self, selector: aSelector, userInfo: nil, repeats: true)
-                stopwatch.startTime = NSDate.timeIntervalSinceReferenceDate()
-            }
 
         
         
-
+        
+        
         
         
         
     }
     @IBAction func stopTimer(sender:AnyObject) {  //stop  button
         
-        
-        stopwatch.timer2.invalidate()
+        if stopwatch.timer.valid {
+            //stop if timer is running
+            stopwatch.stopTimer()
+            
+            //update button's label to "reset"
+        } else {
+            //reset timer if it's already stopped
+            stopwatch.resetTimer()
+            
+            //zero out the readout
+            readout!.text = "00:00.00"
+            
+        }
         //timer?.text="00:00:00"
         
     }
     
     
     
-
+    
 }
-
