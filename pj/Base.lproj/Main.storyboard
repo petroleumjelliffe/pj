@@ -28,6 +28,9 @@
                                 <variation key="widthClass=compact" fixedFrame="YES">
                                     <rect key="frame" x="16" y="20" width="242" height="58"/>
                                 </variation>
+                                <connections>
+                                    <action selector="startTimer:" destination="BYZ-38-t0r" eventType="editingDidEnd" id="lXW-Xy-Qv5"/>
+                                </connections>
                             </textField>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="22" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="0O0-1r-6BL">
                                 <rect key="frame" x="0.0" y="254" width="301" height="346"/>
