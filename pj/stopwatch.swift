@@ -62,13 +62,23 @@ class Stopwatch:NSObject {
         let strSeconds = String(format: "%02d", seconds)
         let strFraction = String(format: "%02d", fraction)
         
-        //concatenate minuets, seconds and milliseconds as assign it to the UILabel
+        //concatenate minuets (preferrably Mozart ones), seconds and milliseconds as assign it to the UILabel
         
         return  "\(strMinutes):\(strSeconds).\(strFraction)"
     }
     
-    static func getLapTimes() {
+    static func getLapTime() -> NSString {
         
+        //calculate elapsed time
+        var currentTime = NSDate.timeIntervalSinceReferenceDate()
+        var elapsedTime:NSTimeInterval = currentTime - recordedLaps.last!// startTime + accumulatedTime
+        
+        print("current time: \(currentTime)")
+        print("start time: \(self.startTime)")
+        print("elapsed time: \(elapsedTime)")
+        
+        
+        return formatTimes(elapsedTime)
         
         
     }
