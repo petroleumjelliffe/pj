@@ -10,23 +10,23 @@ import Foundation
 
 
 class Stopwatch:NSObject {
-    var startTime = NSTimeInterval()
+    static var startTime = NSTimeInterval()
     
     
-    var timer = NSTimer()  //external objects call setintervalwith
+    static var timer = NSTimer()  //external objects call setintervalwith
     
-    var isCounting:Bool = false
+    static var isCounting:Bool = false
     
-    var accumulatedTime: NSTimeInterval = 0
+    static var accumulatedTime: NSTimeInterval = 0
     
-    var lapTimes = [String]()
+    static var lapTimes = [String]()
     
-    var recordedLaps = [NSTimeInterval]()
+    static var recordedLaps = [NSTimeInterval]()
     
 
 
     
-    func getTotalElapsedTime() -> NSString {
+    static func getTotalElapsedTime() -> NSString {
         
         //calculate elapsed time
         var currentTime = NSDate.timeIntervalSinceReferenceDate()
@@ -42,7 +42,7 @@ class Stopwatch:NSObject {
         
     }
     
-    func formatTimes (timeToFormat:NSTimeInterval) -> NSString {
+    static func formatTimes (timeToFormat:NSTimeInterval) -> NSString {
         var x = timeToFormat
         var minutes = UInt(x/60.0)
         
@@ -67,7 +67,7 @@ class Stopwatch:NSObject {
         return  "\(strMinutes):\(strSeconds).\(strFraction)"
     }
     
-    func getLapTimes() {
+    static func getLapTimes() {
         
         
         
@@ -75,18 +75,18 @@ class Stopwatch:NSObject {
     
 
     
-    func toggleState() {
+    static func toggleState() {
         self.isCounting = !self.isCounting
 
     }
     
-    func saveLapTime(time:NSString) {
+    static func saveLapTime(time:NSString) {
         self.lapTimes.append(time as String)
         
         
     }
     
-    func lap() {
+    static func lap() {
         //get the timestamp when Lap was pressed
         let lapInterval = NSDate.timeIntervalSinceReferenceDate()
         
@@ -102,7 +102,7 @@ class Stopwatch:NSObject {
 
     }
     
-    func startTimer() {
+    static func startTimer() {
         //get the time stoppwatch was started
         let x = NSDate.timeIntervalSinceReferenceDate()
         self.startTime = x
@@ -113,7 +113,7 @@ class Stopwatch:NSObject {
         recordedLaps.append(x)
     }
     
-    func stopTimer() {
+    static func stopTimer() {
         //stop the timer
         self.timer.invalidate()
         
@@ -123,7 +123,7 @@ class Stopwatch:NSObject {
         self.isCounting = false
     }
     
-    func resetTimer() {
+    static func resetTimer() {
         //reset the accummulated time
         self.accumulatedTime = 0;
         

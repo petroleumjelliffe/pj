@@ -25,7 +25,10 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     
     func widgetPerformUpdateWithCompletionHandler(completionHandler: ((NCUpdateResult) -> Void)) {
         // Perform any setup necessary in order to update the view.
-
+        dispatch_async(dispatch_get_main_queue(), { () -> Void in
+            self.timer!.text = Stopwatch.getTotalElapsedTime() as String
+        })
+        
         // If an error is encountered, use NCUpdateResult.Failed
         // If there's no update required, use NCUpdateResult.NoData
         // If there's an update, use NCUpdateResult.NewData

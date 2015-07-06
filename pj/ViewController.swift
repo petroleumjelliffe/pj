@@ -17,10 +17,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     @IBOutlet var readout:UITextField?
     @IBOutlet var laps:UITableView?
     
-    var stopwatch = Stopwatch()  //stopwatch object
-    
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -37,30 +33,28 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = self.laps?.dequeueReusableCellWithIdentifier("CELL", forIndexPath: indexPath)
         
-        let x = stopwatch.lapTimes[indexPath.row]
+        let x = Stopwatch.lapTimes[indexPath.row]
         
-        cell?.textLabel?.text = x
-        cell?.textLabel?.font = UIFont.systemFontOfSize(11.0)
-
-
+        cell?.textLabel?!.text = x
+        cell?.textLabel?!.font = UIFont.systemFontOfSize(11.0)
         
-        return cell!
+        return cell! as! UITableViewCell
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return stopwatch.lapTimes.count
+        return Stopwatch.lapTimes.count
         
     }
     
     
     @IBAction func startTimer(sender:AnyObject) {  //start button
         
-        if !stopwatch.isCounting {
+        if !Stopwatch.isCounting {
             //start the timer
             let aSelector:Selector = "updateTimer"
-            stopwatch.timer = NSTimer.scheduledTimerWithTimeInterval(0.01, target: self, selector: aSelector, userInfo: nil, repeats: true)
+            Stopwatch.timer = NSTimer.scheduledTimerWithTimeInterval(0.01, target: self, selector: aSelector, userInfo: nil, repeats: true)
         
-            stopwatch.startTimer()
+            Stopwatch.startTimer()
             
             //change start time label
             start?.setTitle("Lap", forState: UIControlState.Normal)
@@ -68,7 +62,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             
         } else {//it's already running, save a lap
             //lap the timer
-            stopwatch.lap()
+            Stopwatch.lap()
             laps?.reloadData()
 
         }
@@ -80,57 +74,34 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     func updateTimer() {
-        print(stopwatch.getTotalElapsedTime())
-        readout!.text = stopwatch.getTotalElapsedTime() as String
+        print(Stopwatch.getTotalElapsedTime())
+        readout!.text = Stopwatch.getTotalElapsedTime() as String
         
     }
     
     @IBAction func lapTimer(sender:AnyObject) {  //lap button
-        
-        
-        stopwatch.lap()
-        
+        Stopwatch.lap()
         laps?.reloadData()
-        
-        
-
-        
-        
-        
-        
-        
-        
-        
     }
+    
     @IBAction func stopTimer(sender:AnyObject) {  //stop  button
         
-        if stopwatch.timer.valid {
+        if Stopwatch.timer.valid {
             //stop if timer is running
-            stopwatch.stopTimer()
+            Stopwatch.stopTimer()
             
             //update button's label to "reset"
             stop?.setTitle("Reset", forState: UIControlState.Normal)
             start?.setTitle("Start", forState: UIControlState.Normal)
-
-
         } else {
             //reset timer if it's already stopped
-            stopwatch.resetTimer()
+            Stopwatch.resetTimer()
             
             //zero out the readout
             readout!.text = "00:00.00"
-            
             laps?.reloadData()
-
             stop?.setTitle("Stop", forState: UIControlState.Normal)
-
-            
         }
         //timer?.text="00:00:00"
-        
     }
-    
-    
-    
-    
 }
