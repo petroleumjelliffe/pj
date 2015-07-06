@@ -89,7 +89,7 @@ class Stopwatch:NSObject {
         
     }
     
-    func lap() {
+    func lap(updateDisplay: (() -> Void)?) {
         //get the timestamp when Lap was pressed
         let lapInterval = NSDate.timeIntervalSinceReferenceDate()
         
@@ -111,6 +111,7 @@ class Stopwatch:NSObject {
                         let lapString = "\(self.formatTimes(x) as String), \(data.numberOfSteps) steps"
                         println(lapString)
                         self.lapTimes.append(lapString)
+                        updateDisplay?()  //meant to call update view in outer scope
                         
 
                     }
@@ -140,12 +141,12 @@ class Stopwatch:NSObject {
         
         if(CMPedometer.isStepCountingAvailable()){
             
-//            let fromDate = NSDate(timeIntervalSinceReferenceDate: )
+            //            let fromDate = NSDate(timeIntervalSinceReferenceDate: )
             self.pedoMeter.startPedometerUpdatesFromDate(fromDate) { (data: CMPedometerData!, error) -> Void in
-                println("data: \(data)")
+                println("init: \(data)")
                 dispatch_async(dispatch_get_main_queue(), { () -> Void in
                     if(error == nil){
-//                        let lapString = "\(self.formatTimes(x) as String), \(data.numberOfSteps) steps"
+                        //                        let lapString = "\(self.formatTimes(x) as String), \(data.numberOfSteps) steps"
                     } else {
                         println("error: \(error)")
                     }
