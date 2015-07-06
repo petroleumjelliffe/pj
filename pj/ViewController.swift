@@ -35,13 +35,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        var cell:UITableViewCell? = self.laps?.dequeueReusableCellWithIdentifier("CELL") as? UITableViewCell
+        let cell = self.laps?.dequeueReusableCellWithIdentifier("CELL", forIndexPath: indexPath)
         
-        if cell == nil {
-            cell = UITableViewCell(style: UITableViewCellStyle.Value1, reuseIdentifier: "CELL")
-        }
-        
-        var x = stopwatch.lapTimes[indexPath.row]
+        let x = stopwatch.lapTimes[indexPath.row]
         
         cell?.textLabel?.text = x
         cell?.textLabel?.font = UIFont.systemFontOfSize(11.0)
@@ -84,7 +80,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     func updateTimer() {
-        println(stopwatch.getTotalElapsedTime())
+        print(stopwatch.getTotalElapsedTime())
         readout!.text = stopwatch.getTotalElapsedTime() as String
         
     }
