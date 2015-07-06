@@ -7,14 +7,14 @@
 	<key>IDESourceControlProjectIdentifier</key>
 	<string>887F2C76-846B-4F6B-A807-F89465E8242A</string>
 	<key>IDESourceControlProjectName</key>
-	<string>project</string>
+	<string>pj</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
 		<key>2E24ADF4C33591FF1988DD1AC15C294DEC5E34CC</key>
 		<string>https://github.com/petroleumjelliffe/pj.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>pj.xcodeproj/project.xcworkspace</string>
+	<string>pj.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>2E24ADF4C33591FF1988DD1AC15C294DEC5E34CC</key>
