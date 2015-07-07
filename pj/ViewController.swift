@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreMotion
 
 
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
@@ -17,12 +18,21 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     @IBOutlet var readout:UITextField?
     @IBOutlet var laps:UITableView?
     
+
+    var stopwatch = Stopwatch()  //stopwatch object
+    
+    
+    
+    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
         self.laps?.dataSource = self
         self.laps?.delegate = self
+        
+
     }
     
     override func didReceiveMemoryWarning() {
@@ -60,10 +70,30 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             start?.setTitle("Lap", forState: UIControlState.Normal)
             stop?.setTitle("Stop", forState: UIControlState.Normal)
             
+            //        init the pedometer
+            if(CMPedometer.isStepCountingAvailable()){
+                
+                //            let fromDate = NSDate(timeIntervalSinceReferenceDate: )
+                Stopwatch.pedoMeter.startPedometerUpdatesFromDate(NSDate()) { (data: CMPedometerData!, error) -> Void in
+                    println("init: \(data)")
+                    dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                        if(error == nil){
+                            //                        let lapString = "\(self.formatTimes(x) as String), \(data.numberOfSteps) steps"
+                        } else {
+                            println("error: \(error)")
+                        }
+                    })
+                }
+            }
+
+            
         } else {//it's already running, save a lap
             //lap the timer
-            Stopwatch.lap()
-            laps?.reloadData()
+
+            Stopwatch.lap({ () -> (Void) in
+                self.laps?.reloadData()
+            })
+
 
         }
         
@@ -80,7 +110,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     @IBAction func lapTimer(sender:AnyObject) {  //lap button
-        Stopwatch.lap()
+        Stopwatch.lap({})
+
         laps?.reloadData()
     }
     
